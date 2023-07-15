@@ -11,11 +11,11 @@ export default function LoggedOutNav() {
   return (
     <Stack.Navigator
       initialRouteName="Welcome"
-      mode="card"
-      headerMode="float"
+      presentation="card"
       screenOptions={{
         headerBackTitleVisible: false,
         headerTintColor: "black",
+        headerMode: "float",
       }}
     >
       <Stack.Screen
