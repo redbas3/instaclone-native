@@ -22,7 +22,7 @@ export default function LoggedOutNav() {
         name="Welcome"
         component={Welcome}
         options={{
-          title: "Welcome baby",
+          headerShown: false,
         }}
       />
       <Stack.Screen
