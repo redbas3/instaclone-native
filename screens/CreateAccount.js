@@ -1,23 +1,46 @@
 import React from "react";
 import styled from "styled-components/native";
-
-const Container = styled.View`
-  flex: 1;
-  background-color: black;
-  align-items: center;
-  justify-content: center;
-  padding: 0 40px;
-`;
-
-const Logo = styled.Image`
-  max-width: 100%;
-  height: 150px;
-`;
+import AuthLayout from "../components/auth/AuthLayout";
+import AuthButton from "../components/auth/AuthButton";
+import { TextInput } from "react-native";
 
 export default function CreateAccount() {
   return (
-    <Container>
-      <Logo resizeMode="contain" source={require("../assets/logo.png")} />
-    </Container>
+    <AuthLayout>
+      <TextInput
+        placeholder="Frist Name"
+        placeholderTextColor="gray"
+        returnKeyType="next"
+        style={{ backgroundColor: "white", width: "100%" }}
+      />
+      <TextInput
+        placeholder="Last Name"
+        placeholderTextColor="gray"
+        returnKeyType="next"
+        style={{ backgroundColor: "white", width: "100%" }}
+      />
+      <TextInput
+        placeholder="Username"
+        placeholderTextColor="gray"
+        returnKeyType="next"
+        style={{ backgroundColor: "white", width: "100%" }}
+      />
+      <TextInput
+        placeholder="Email"
+        placeholderTextColor="gray"
+        keyboardType="email-address"
+        returnKeyType="next"
+        style={{ backgroundColor: "white", width: "100%" }}
+      />
+      <TextInput
+        placeholder="Password"
+        placeholderTextColor="gray"
+        secureTextEntry
+        returnKeyType="done"
+        style={{ backgroundColor: "white", width: "100%" }}
+      />
+
+      <AuthButton disabled={true} text={"Create Account"} onPress={() => {}} />
+    </AuthLayout>
   );
 }
