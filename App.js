@@ -6,6 +6,8 @@ import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
 import Entypo from "@expo/vector-icons/Entypo";
+import LoggedOutNav from "./navigators/LoggedOutNav";
+import { NavigationContainer } from "@react-navigation/native";
 
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 const loadImages = (images) =>
@@ -62,9 +64,8 @@ export default function App() {
   }
 
   return (
-    <View onLayout={onLayoutRootView}>
-      <Text>Hello</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer onLayout={onLayoutRootView}>
+      <LoggedOutNav />
+    </NavigationContainer>
   );
 }
