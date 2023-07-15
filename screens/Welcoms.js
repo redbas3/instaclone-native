@@ -8,6 +8,7 @@ const Container = styled.View`
   background-color: black;
   align-items: center;
   justify-content: center;
+  padding: 0 40px;
 `;
 
 const Logo = styled.Image`
@@ -15,21 +16,24 @@ const Logo = styled.Image`
   height: 150px;
 `;
 
-const CreateAccount = styled.View`
+const CreateAccount = styled.TouchableOpacity`
   background-color: ${colors.blue};
-  padding: 7px 10px;
+  padding: 10px;
   border-radius: 5px;
+  width: 100%;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
 `;
 const CreateAccountText = styled.Text`
   color: white;
   font-weight: 600;
   font-size: 16px;
+  text-align: center;
 `;
 
 const LoginLink = styled.Text`
   color: ${colors.blue};
   font-weight: 600;
-  margin-top: 16px;
+  margin-top: 20px;
 `;
 
 export default function Welcome({ navigation }) {
@@ -38,11 +42,10 @@ export default function Welcome({ navigation }) {
   return (
     <Container>
       <Logo resizeMode="contain" source={require("../assets/logo.png")} />
-      <TouchableOpacity onPress={goToCreateAccount}>
-        <CreateAccount>
-          <CreateAccountText>Create Account</CreateAccountText>
-        </CreateAccount>
-      </TouchableOpacity>
+      <CreateAccount disabled={false} onPress={goToCreateAccount}>
+        <CreateAccountText>Create New Account</CreateAccountText>
+      </CreateAccount>
+
       <TouchableOpacity onPress={goToLogin}>
         <LoginLink>Log in</LoginLink>
       </TouchableOpacity>
