@@ -11,8 +11,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styles";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import client, { isLoggedInVar } from "./apollo";
+import client, { isLoggedInVar, tokenVar } from "./apollo";
 import LoggedInNav from "./navigators/LoggedInNav";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 const loadImages = (images) =>
@@ -43,11 +44,16 @@ export default function App() {
         // await Asset.loadAsync(require('./1600x800_1.jpeg'));
         // await Image.prefetch("https://reactnative.dev/docs/assets/GettingStartedCongratulations.png")
 
+        const token = await AsyncStorage.getItem("token");
+        if (token) {
+          tokenVar(token);
+          isLoggedInVar(true);
+        }
+
         await Promise.all([...fonts, ...images]);
       } catch (e) {
         console.warn(e);
       } finally {
-        // Tell the application to render
         setAppIsReady(true);
       }
     }
@@ -57,11 +63,6 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
-      // loading its initial state and rendering its first pixels. So instead,
-      // we hide the splash screen once we know the root view has already
-      // performed layout.
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
