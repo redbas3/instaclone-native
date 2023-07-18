@@ -3,9 +3,47 @@ import AuthLayout from "../components/auth/AuthLayout";
 import AuthButton from "../components/auth/AuthButton";
 import { TextInput } from "../components/auth/AuthShare";
 import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
+import { isLoggedInVar } from "../apollo";
 
-export default function CreateAccount() {
-  const { register, handleSubmit, setValue } = useForm();
+const CREATE_ACCOUNT_MUTATION = gql`
+  mutation CreateAccount(
+    $firstName: String!
+    $lastName: String!
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    createAccount(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
+export default function CreateAccount({ navigation }) {
+  const { register, handleSubmit, setValue, watch, getValues } = useForm();
+  const onCompleted = (data) => {
+    const {
+      createAccount: { ok },
+    } = data;
+    if (ok) {
+      const { username, password } = getValues();
+      navigation.navigate("Login", { username, password });
+    }
+  };
+  const [createAccountMutation, { loading }] = useMutation(
+    CREATE_ACCOUNT_MUTATION,
+    {
+      onCompleted,
+    }
+  );
 
   const lastNameRef = useRef();
   const usernameRef = useRef();
@@ -17,7 +55,13 @@ export default function CreateAccount() {
   };
 
   const onVaild = (data) => {
-    console.log(data);
+    if (!loading) {
+      createAccountMutation({
+        variables: {
+          ...data,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -76,7 +120,14 @@ export default function CreateAccount() {
       />
 
       <AuthButton
-        loading
+        loading={loading}
+        disabled={
+          !watch("firstName") ||
+          !watch("lastName") ||
+          !watch("username") ||
+          !watch("email") ||
+          !watch("password")
+        }
         text={"Create Account"}
         onPress={handleSubmit(onVaild)}
       />
