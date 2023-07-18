@@ -15,6 +15,9 @@ export default function LoggedOutNav() {
       screenOptions={{
         headerBackTitleVisible: false,
         headerMode: "float",
+        headerTitle: () => false,
+        headerTransparent: true,
+        headerTintColor: "white",
       }}
     >
       <Stack.Screen
@@ -24,23 +27,8 @@ export default function LoggedOutNav() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerBackTitleVisible: false,
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="CreateAccount"
-        component={CreateAccount}
-        options={{
-          headerTitle: () => false,
-          headerTransparent: true,
-          headerTintColor: "white",
-        }}
-      />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="CreateAccount" component={CreateAccount} />
     </Stack.Navigator>
   );
 }
