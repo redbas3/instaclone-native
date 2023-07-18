@@ -21,11 +21,11 @@ export default function CreateAccount() {
   };
 
   useEffect(() => {
-    register("firstName");
-    register("lastName");
-    register("username");
-    register("email");
-    register("password");
+    register("firstName", { required: true });
+    register("lastName", { required: true });
+    register("username", { required: true });
+    register("email", { required: true });
+    register("password", { required: true });
   }, [register]);
 
   return (
@@ -33,7 +33,7 @@ export default function CreateAccount() {
       <TextInput
         autoFocus
         placeholder="Frist Name"
-        placeholderTextColor={"rgba(255, 255, 255, 0.8)"}
+        placeholderTextColor={"rgba(255, 255, 255, 0.3)"}
         returnKeyType="next"
         onSubmitEditing={() => onNext(lastNameRef)}
         onChangeText={(text) => setValue("firstName", text)}
@@ -41,7 +41,7 @@ export default function CreateAccount() {
       <TextInput
         ref={lastNameRef}
         placeholder="Last Name"
-        placeholderTextColor={"rgba(255, 255, 255, 0.8)"}
+        placeholderTextColor={"rgba(255, 255, 255, 0.3)"}
         returnKeyType="next"
         onSubmitEditing={() => onNext(usernameRef)}
         onChangeText={(text) => setValue("lastName", text)}
@@ -49,7 +49,7 @@ export default function CreateAccount() {
       <TextInput
         ref={usernameRef}
         placeholder="Username"
-        placeholderTextColor={"rgba(255, 255, 255, 0.8)"}
+        placeholderTextColor={"rgba(255, 255, 255, 0.3)"}
         returnKeyType="next"
         autoCapitalize="none"
         onSubmitEditing={() => onNext(emailRef)}
@@ -58,7 +58,7 @@ export default function CreateAccount() {
       <TextInput
         ref={emailRef}
         placeholder="Email"
-        placeholderTextColor={"rgba(255, 255, 255, 0.8)"}
+        placeholderTextColor={"rgba(255, 255, 255, 0.3)"}
         keyboardType="email-address"
         returnKeyType="next"
         onSubmitEditing={() => onNext(passwordRef)}
@@ -67,7 +67,7 @@ export default function CreateAccount() {
       <TextInput
         ref={passwordRef}
         placeholder="Password"
-        placeholderTextColor={"rgba(255, 255, 255, 0.8)"}
+        placeholderTextColor={"rgba(255, 255, 255, 0.3)"}
         secureTextEntry
         returnKeyType="done"
         lastOne={true}
@@ -76,7 +76,7 @@ export default function CreateAccount() {
       />
 
       <AuthButton
-        disabled={false}
+        loading
         text={"Create Account"}
         onPress={handleSubmit(onVaild)}
       />

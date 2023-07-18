@@ -10,6 +10,9 @@ import LoggedOutNav from "./navigators/LoggedOutNav";
 import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styles";
+import { ApolloProvider, useReactiveVar } from "@apollo/client";
+import client, { isLoggedInVar } from "./apollo";
+import LoggedInNav from "./navigators/LoggedInNav";
 
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 const loadImages = (images) =>
@@ -24,6 +27,7 @@ const loadImages = (images) =>
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const isDark = useColorScheme() === "dark";
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
 
   useEffect(() => {
     async function prepare() {
@@ -69,10 +73,12 @@ export default function App() {
   // console.log(Appearance.getColorScheme());
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <NavigationContainer onLayout={onLayoutRootView}>
-        <LoggedOutNav />
-      </NavigationContainer>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <NavigationContainer onLayout={onLayoutRootView}>
+          {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
+        </NavigationContainer>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }

@@ -6,5 +6,6 @@ export const TextInput = styled.TextInput`
   margin-bottom: 8px;
   border-radius: 4px;
   width: 100%;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: ${(props) => (props.lastOne ? "15" : "8")}px;
 `;
