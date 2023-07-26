@@ -4,7 +4,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Profile from "../screens/Profile";
 import Notifications from "../screens/Notifications";
 import Search from "../screens/Search";
-import { Ionicons } from "@expo/vector-icons";
+import { View } from "react-native-web";
+import Camera from "../screens/Camera";
+import TabIcon from "../components/nav/TabIcon";
 
 const Tabs = createBottomTabNavigator();
 
@@ -38,7 +40,7 @@ export default function LoggedInNav() {
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
-              <Ionicons name={"home"} color={color} size={focused ? 24 : 20} />
+              <TabIcon focused={focused} iconName={"home"} color={color} />
             );
           },
         }}
@@ -49,11 +51,18 @@ export default function LoggedInNav() {
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
-              <Ionicons
-                name={"search"}
-                color={color}
-                size={focused ? 24 : 20}
-              />
+              <TabIcon focused={focused} iconName={"search"} color={color} />
+            );
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="Camera"
+        component={Camera}
+        options={{
+          tabBarIcon: ({ focused, color }) => {
+            return (
+              <TabIcon focused={focused} iconName={"camera"} color={color} />
             );
           },
         }}
@@ -64,7 +73,7 @@ export default function LoggedInNav() {
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
-              <Ionicons name={"heart"} color={color} size={focused ? 24 : 20} />
+              <TabIcon focused={focused} iconName={"heart"} color={color} />
             );
           },
         }}
@@ -75,11 +84,7 @@ export default function LoggedInNav() {
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
-              <Ionicons
-                name={"person"}
-                color={color}
-                size={focused ? 24 : 20}
-              />
+              <TabIcon focused={focused} iconName={"person"} color={color} />
             );
           },
         }}
