@@ -18,14 +18,7 @@ export default function LoggedInNav() {
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "black",
-          borderTopColor: "rgba(255, 255, 255, 0.2)",
-        },
-        headerStyle: {
-          backgroundColor: "black",
-          borderBottomColor: "black",
-        },
-        headerTitleStyle: {
-          color: "white",
+          borderTopColor: "rgba(255, 255, 255, 0.3)",
         },
         tabBarActiveTintColor: "white",
         tabBarLabelStyle: {
