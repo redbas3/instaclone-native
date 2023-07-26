@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import { Image } from "react-native";
 import React from "react";
 import Profile from "../../screens/Profile";
 import Photo from "../../screens/Photo";
@@ -13,6 +14,7 @@ export default function StackNavFactory({ screenName }) {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerMode: "screen",
         headerBackTitleVisible: false,
         headerTintColor: "white",
         headerStyle: {
@@ -21,7 +23,27 @@ export default function StackNavFactory({ screenName }) {
         },
       }}
     >
-      {screenName === "Feed" && <Stack.Screen name="Feed" component={Feed} />}
+      {screenName === "Feed" && (
+        <Stack.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 100,
+                  maxHeight: 50,
+                }}
+                resizeMode="contain"
+                source={require("../../assets/logo.png")}
+              />
+            ),
+          }}
+        />
+      )}
+
       {screenName === "Search" && (
         <Stack.Screen name="Search" component={Search} />
       )}

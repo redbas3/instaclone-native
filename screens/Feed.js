@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
+import { logUserOut } from "../apollo";
 
 export default function Feed({ navigation }) {
+  const { data } = useQuery();
   return (
     <View
       style={{
@@ -10,9 +12,7 @@ export default function Feed({ navigation }) {
         justifyContent: "center",
       }}
     >
-      <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
-        <Text style={{ color: "white" }}>Photo</Text>
-      </TouchableOpacity>
+      <Text style={{ color: "white" }}>Feed</Text>
     </View>
   );
 }

@@ -17,6 +17,7 @@ const Container = styled.View`
 
 const Logo = styled.Image`
   max-width: 100%;
+  width: 200px;
   height: 150px;
 `;
 
