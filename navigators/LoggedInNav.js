@@ -7,6 +7,8 @@ import Search from "../screens/Search";
 import { View } from "react-native-web";
 import Camera from "../screens/Camera";
 import TabIcon from "../components/nav/TabIcon";
+import Me from "../screens/Me";
+import StackNavFactory from "../components/nav/StackNavFactory";
 
 const Tabs = createBottomTabNavigator();
 
@@ -32,11 +34,11 @@ export default function LoggedInNav() {
           marginTop: -5,
         },
         tabBarShowLabel: false,
+        headerShown: false,
       }}
     >
       <Tabs.Screen
-        name="Feed"
-        component={Feed}
+        name="TabFeed"
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
@@ -44,10 +46,11 @@ export default function LoggedInNav() {
             );
           },
         }}
-      />
+      >
+        {() => <StackNavFactory screenName="Feed" />}
+      </Tabs.Screen>
       <Tabs.Screen
-        name="Search"
-        component={Search}
+        name="TabSearch"
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
@@ -55,10 +58,11 @@ export default function LoggedInNav() {
             );
           },
         }}
-      />
+      >
+        {() => <StackNavFactory screenName="Search" />}
+      </Tabs.Screen>
       <Tabs.Screen
-        name="Camera"
-        component={Camera}
+        name="TabCamera"
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
@@ -66,10 +70,11 @@ export default function LoggedInNav() {
             );
           },
         }}
-      />
+      >
+        {() => <StackNavFactory screenName="Camera" />}
+      </Tabs.Screen>
       <Tabs.Screen
-        name="Notifications"
-        component={Notifications}
+        name="TabNotifications"
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
@@ -77,10 +82,11 @@ export default function LoggedInNav() {
             );
           },
         }}
-      />
+      >
+        {() => <StackNavFactory screenName="Notifications" />}
+      </Tabs.Screen>
       <Tabs.Screen
-        name="Profile"
-        component={Profile}
+        name="TabMe"
         options={{
           tabBarIcon: ({ focused, color }) => {
             return (
@@ -88,7 +94,9 @@ export default function LoggedInNav() {
             );
           },
         }}
-      />
+      >
+        {() => <StackNavFactory screenName="Me" />}
+      </Tabs.Screen>
     </Tabs.Navigator>
   );
 }
