@@ -43,10 +43,11 @@ export default function Feed({ navigation }) {
     setRefreshing(false);
   };
   const [refreshing, setRefreshing] = useState(false);
+  console.log(data?.seeFeed.length);
   return (
     <ScreenLayout loading={loading}>
       <FlatList
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.05}
         onEndReached={() =>
           fetchMore({
             variables: {
