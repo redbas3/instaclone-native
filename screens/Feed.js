@@ -12,8 +12,8 @@ import Photo from "../components/Photo";
 import { useState } from "react";
 
 const FEED_QUERY = gql`
-  query seeFeed {
-    seeFeed {
+  query seeFeed($offset: Int!) {
+    seeFeed(offset: $offset) {
       id
       file
       likes
@@ -43,7 +43,6 @@ export default function Feed({ navigation }) {
     setRefreshing(false);
   };
   const [refreshing, setRefreshing] = useState(false);
-  console.log(data?.seeFeed.length);
   return (
     <ScreenLayout loading={loading}>
       <FlatList
@@ -63,7 +62,6 @@ export default function Feed({ navigation }) {
         keyExtractor={(item) => item.id}
         renderItem={renderPhoto}
       ></FlatList>
-      <Text style={{ color: "white" }}>Loaded</Text>
     </ScreenLayout>
   );
 }
