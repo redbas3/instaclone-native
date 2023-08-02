@@ -15,7 +15,7 @@ const UserAvatar = styled.Image`
   margin-right: 10px;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 11.5px;
 `;
 const Username = styled.Text`
   color: white;
@@ -73,11 +73,11 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
             <Ionicons
               name={isLiked ? "heart" : "heart-outline"}
               color={isLiked ? "tomato" : "white"}
-              size="22"
+              size={22}
             />
           </Action>
           <Action onPress={() => navigation.navigate("Comments")}>
-            <Ionicons name="chatbubble-outline" color="white" size="22" />
+            <Ionicons name="chatbubble-outline" color="white" size={22} />
           </Action>
         </Actions>
         <TouchableOpacity onPress={() => navigation.navigate("Likes")}>
