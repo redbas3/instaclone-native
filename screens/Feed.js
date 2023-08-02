@@ -16,6 +16,7 @@ const FEED_QUERY = gql`
       id
       file
       likes
+      isLiked
       user {
         username
         avatar
