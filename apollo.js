@@ -40,24 +40,26 @@ const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          // seeFeed: {
-          //   keyArgs: false,
-          //   merge(existing = [], incoming = []) {
-          //     return [...existing, ...incoming];
-          //   },
-          // },
-          // same
-          seeFeed: offsetLimitPagination(),
-        },
+export const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        // seeFeed: {
+        //   keyArgs: false,
+        //   merge(existing = [], incoming = []) {
+        //     return [...existing, ...incoming];
+        //   },
+        // },
+        // same
+        seeFeed: offsetLimitPagination(),
       },
     },
-  }),
+  },
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache,
 });
 
 export default client;

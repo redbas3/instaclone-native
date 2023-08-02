@@ -11,9 +11,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styles";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import client, { isLoggedInVar, tokenVar } from "./apollo";
+import client, { isLoggedInVar, tokenVar, cache } from "./apollo";
 import LoggedInNav from "./navigators/LoggedInNav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { persistCache, AsyncStorageWrapper } from "apollo3-cache-persist";
 
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 const loadImages = (images) =>
@@ -49,6 +50,11 @@ export default function App() {
           tokenVar(token);
           isLoggedInVar(true);
         }
+
+        await persistCache({
+          cache,
+          storage: new AsyncStorageWrapper(AsyncStorage),
+        });
 
         await Promise.all([...fonts, ...images]);
       } catch (e) {
