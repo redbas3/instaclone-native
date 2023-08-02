@@ -56,8 +56,6 @@ export default function Photo({ id, user, caption, file, isLiked, likes }) {
     });
   }, []);
 
-  console.log(isLiked);
-
   return (
     <Container>
       <Header onPress={() => navigation.navigate("Profile")}>
